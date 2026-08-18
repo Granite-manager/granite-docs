@@ -458,3 +458,37 @@ body {
 .copy-btn[title="Copied!"] svg {
     stroke: #22c55e;
 }
+
+.stats-warning {
+    color: #dc2626;
+    background: #fef2f2;
+    border: 1px solid #dc2626;
+    border-radius: var(--scalar-radius);
+    padding: 0.875rem 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.stats-warning code {
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+.dark-mode .stats-warning {
+    color: #fca5a5;
+    background: rgba(220, 38, 38, 0.15);
+    border-color: #ef4444;
+}
+
+.dark-mode .stats-warning code {
+    color: #f87171;
+}
+
+.stats-field {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.dark-mode .stats-field {
+    color: #f87171;
+}

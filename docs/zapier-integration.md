@@ -21,6 +21,10 @@ The webhook sends a JSON body to the [`POST /v1/webhooks/new-lead-form/{company_
 
 When configuring the request body, use the exact field names below. Only **`name`** is required — all other fields are optional but recommended for a complete lead record.
 
+<p class="stats-warning" style="color:#dc2626;background:#fef2f2;border:1px solid #dc2626;border-radius:6px;padding:0.875rem 1rem;font-weight:600;line-height:1.5;">
+Important for statistics: you must send both <code style="color:#b91c1c;font-weight:700;">referral_source</code> (exactly <code style="color:#b91c1c;font-weight:700;">facebook</code>) and <code style="color:#b91c1c;font-weight:700;">form_name</code> (the form id, e.g. <code style="color:#b91c1c;font-weight:700;">facebook_form</code>). Without these two values, website vs Facebook statistics will be wrong.
+</p>
+
 ### Required
 
 | Field | Type | Description |
@@ -37,7 +41,8 @@ When configuring the request body, use the exact field names below. Only **`name
 | `city` | string | City |
 | `postal_code` | string | ZIP / postal code |
 | `details` | string | Additional project notes or form answers |
-| `referral_source` | string | Where the lead came from (e.g. `facebook`) |
+| `referral_source` | string | <span style="color:#dc2626;font-weight:600;">Required for statistics — must be `facebook`</span> |
+| `form_name` | string | <span style="color:#dc2626;font-weight:600;">Required for statistics — form name (e.g. `facebook_form`, `facebook_cabinet_quote_form`)</span> |
 | `compaign_name` | string | Facebook campaign name |
 | `adset_name` | string | Facebook ad set name |
 | `ad_name` | string | Facebook ad name |
@@ -54,6 +59,25 @@ When configuring the request body, use the exact field names below. Only **`name
 | `file` | string | Attached file reference |
 
 > **Tip:** Map as many optional fields as your Facebook Lead Form collects. Fields you leave empty are sent as `null` and ignored by the API.
+
+## Example Payload
+
+Below is an example of the final JSON payload your Zap should send to the webhook. Use it as a reference when mapping your fields:
+
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "phone": "+15551234567",
+  "city": "Indianapolis",
+  "referral_source": "facebook",
+  "form_name": "facebook_form",
+  "campaign_name": "Summer Kitchen Special 2026",
+  "remodel_type": "Kitchen Countertops",
+  "project_size": "Approx 60 sq ft",
+  "your_message": "Looking to get a quote for a granite installation next month."
+}
+```
 
 ---
 
@@ -122,9 +146,10 @@ Under **Data**, add a row for each field from the [Required Payload Fields](#req
 | `ad_name` | Ad name |
 | `start_date` | When are you planning to start the project? |
 | `referral_source` | Type `facebook` as a static value |
+| `form_name` | Type the form name as a static value (e.g. `facebook_form`, `facebook_cabinet_quote_form`) |
 
 - **Dynamic fields:** Click each value field and select the corresponding token from the Facebook Lead Ads trigger (e.g., contact details, project notes, campaign names).
-- **Static fields:** For fields that need the same value on every lead (such as `referral_source`), type the plain text directly (e.g., `facebook`).
+- **Static fields:** Set `referral_source` to `facebook` and `form_name` to the form identifier (e.g. `facebook_form`, `facebook_cabinet_quote_form`). `referral_source` must be `website` or `facebook` for correct statistics — do not put the form name in `referral_source`.
 
 **Wrap Request In Array:** Leave **No**.
 

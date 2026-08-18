@@ -26,6 +26,13 @@
     optional but recommended for a complete lead record.
 </p>
 
+<p class="stats-warning" style="color:#dc2626;background:#fef2f2;border:1px solid #dc2626;border-radius:6px;padding:0.875rem 1rem;font-weight:600;line-height:1.5;">
+    Important for statistics: you must send both
+    <code style="color:#b91c1c;font-weight:700;">referral_source</code> (exactly <code style="color:#b91c1c;font-weight:700;">website</code>) and
+    <code style="color:#b91c1c;font-weight:700;">form_name</code> (the form id, e.g. <code style="color:#b91c1c;font-weight:700;">quick_quote</code>).
+    Without these two values, website vs Facebook statistics will be wrong.
+</p>
+
 <h3>Required</h3>
 <table>
     <thead>
@@ -84,9 +91,14 @@
             <td>Additional project notes or form answers</td>
         </tr>
         <tr>
-            <td><code>referral_source</code></td>
-            <td>string</td>
-            <td>Where the lead came from — enter the name of the form (e.g. <code>quick_estimate</code>, <code>builders</code>, <code>cabinets</code>)</td>
+            <td class="stats-field" style="color:#dc2626;font-weight:600;"><code>referral_source</code></td>
+            <td class="stats-field" style="color:#dc2626;font-weight:600;">string</td>
+            <td class="stats-field" style="color:#dc2626;font-weight:600;">Required for statistics — must be <code>website</code></td>
+        </tr>
+        <tr>
+            <td class="stats-field" style="color:#dc2626;font-weight:600;"><code>form_name</code></td>
+            <td class="stats-field" style="color:#dc2626;font-weight:600;">string</td>
+            <td class="stats-field" style="color:#dc2626;font-weight:600;">Required for statistics — form name (e.g. <code>cabinet_quote</code>, <code>quick_quote</code>, <code>contact_page</code>)</td>
         </tr>
         <tr>
             <td><code>campaign_name</code></td>
@@ -178,19 +190,14 @@
 <pre><code>{
   "name": "John Doe",
   "email": "johndoe@example.com",
-  "phone": "555-0199",
-  "postal_code": "46201",
-  "address": "123 Main Street",
-  "remodel_type": "Kitchen Countertop Replacement",
-  "project_size": "45 sq ft",
-  "contact_time": "Evening",
-  "tear_out": "Yes",
-  "improve_offer": "Free Estimate",
-  "sink": "Undermount Single Bowl",
-  "stove_type": "Gas Cooktop",
-  "backsplash": "Tile",
-  "your_message": "Looking to replace old laminate countertops with granite.",
-  "referral_source": "quick_estimate"
+  "phone": "+15551234567",
+  "city": "Indianapolis",
+  "referral_source": "website",
+  "form_name": "quick_quote",
+  "campaign_name": "Summer Kitchen Special 2026",
+  "remodel_type": "Kitchen Countertops",
+  "project_size": "Approx 60 sq ft",
+  "your_message": "Looking to get a quote for a granite installation next month."
 }</code></pre>
 
 <hr />
@@ -360,7 +367,11 @@
         </tr>
         <tr>
             <td><code>referral_source</code></td>
-            <td>Type the name of the form as a static value (e.g. <code>quick_estimate</code>, <code>builders</code>, <code>cabinets</code>)</td>
+            <td>Type <code>website</code> as a static value</td>
+        </tr>
+        <tr>
+            <td><code>form_name</code></td>
+            <td>Type the form name as a static value (e.g. <code>cabinet_quote</code>, <code>quick_quote</code>)</td>
         </tr>
     </tbody>
 </table>
@@ -372,10 +383,12 @@
         project notes, message).
     </li>
     <li>
-        <strong>Static fields:</strong> For fields that need the same value on
-        every lead (such as <code>referral_source</code>), type the
-        name of the form directly (e.g., <code>quick_estimate</code>,
-        <code>builders</code>, <code>cabinets</code>).
+        <strong>Static fields:</strong> Set <code>referral_source</code> to
+        <code>website</code> and <code>form_name</code> to the form identifier
+        (e.g. <code>cabinet_quote</code>, <code>quick_quote</code>).
+        <code>referral_source</code> must be <code>website</code> or
+        <code>facebook</code> for correct statistics — do not put the form name
+        in <code>referral_source</code>.
     </li>
 </ul>
 

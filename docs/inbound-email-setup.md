@@ -2,9 +2,13 @@
 
 Please follow these exact steps to add the required DNS verification records to the domain registrar and configure the master email routing rules inside Google Admin.
 
+Copy the values from your Amazon SES domain identity (Easy DKIM, custom MAIL FROM, and DMARC). Detection of DNS changes may take up to 72 hours.
+
+If your registrar auto-appends the root domain, enter only the host portion (for example `mail` instead of `mail.example.com`). Do not add a trailing period unless your provider requires it.
+
 ## Part 1: Add DNS Records to the Domain Registrar
 
-Log into the company account where the domain was purchased (e.g., GoDaddy, Namecheap, Squarespace) and open the DNS Management / Zone Editor to add these 5 records:
+Log into the company account where the domain was purchased (e.g., GoDaddy, Namecheap, Squarespace) and open the DNS Management / Zone Editor to add these records:
 
 ### DKIM Record 1
 
@@ -27,15 +31,25 @@ Log into the company account where the domain was purchased (e.g., GoDaddy, Name
 ### MAIL FROM MX Record
 
 - Type: MX
-- Name/Host: `mail`
+- Name/Host: `[Paste MAIL FROM MX Name]`
 - Priority: `10`
-- Value/Target: `[Paste Inbound SMTP Server String]`
+- Value/Target: `[Paste MAIL FROM MX Value]`
 
-### MAIL FROM TXT Record
+<p class="stats-warning" style="color:#dc2626;background:#fef2f2;border:1px solid #dc2626;border-radius:6px;padding:0.875rem 1rem;font-weight:600;line-height:1.5;">
+No Priority field? Put both in Value: <code style="color:#b91c1c;font-weight:700;">10 feedback-smtp.us-east-2.amazonses.com</code>
+</p>
+
+### MAIL FROM TXT (SPF) Record
 
 - Type: TXT
-- Name/Host: `mail`
-- Value/Target: `[Paste SPF/TXT Configuration String]`
+- Name/Host: `[Paste MAIL FROM TXT Name]`
+- Value/Target: `[Paste MAIL FROM TXT Value]`
+
+### DMARC TXT Record
+
+- Type: TXT
+- Name/Host: `[Paste DMARC Name]`
+- Value/Target: `[Paste DMARC Value]`
 
 ## Part 2: Create SMTP Route Host in Google Admin
 
@@ -62,6 +76,8 @@ Before configuring the routing rule, create the destination route that Amazon SE
    <img src="/inbound-email-host-settings.png" alt="Amazon SES SMTP route host configuration with name, server, port, and TLS settings" width="415">
 
 6. Click **SAVE**.
+
+> **Do not confuse this with MAIL FROM.** Google Admin hosts use **`inbound-smtp.us-east-2.amazonaws.com`** (receiving). The DNS MAIL FROM MX record uses **`feedback-smtp.<region>.amazonses.com`** from SES (sending identity).
 
 ## Part 3: Configure Domain-Wide Routing in Google Admin
 

@@ -186,6 +186,8 @@ if (matchedRoute) {
         })
 } else {
     createApiReference('#api-reference', {
-        url: 'https://cawv6iwjgxpk5fj2fchs6vc5vq0bycwp.lambda-url.us-east-2.on.aws/api-docs/openapi.json',
+        url: import.meta.env.DEV
+            ? '/api-docs/openapi.json'
+            : 'https://cawv6iwjgxpk5fj2fchs6vc5vq0bycwp.lambda-url.us-east-2.on.aws/api-docs/openapi.json',
     })
 }
