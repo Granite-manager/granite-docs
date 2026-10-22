@@ -42,6 +42,16 @@
         "title": "Inbound Email Setup",
         "type": "page",
         "filepath": "inbound-email-setup.md"
+      },
+      "/domain-trust": {
+        "title": "Domain Trust",
+        "type": "page",
+        "filepath": "domain-trust.md"
+      },
+      "/cloudtalk-setup": {
+        "title": "CloudTalk Setup",
+        "type": "page",
+        "filepath": "cloudtalk-setup.md"
       }
     }
   }

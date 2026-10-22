@@ -2,6 +2,7 @@ import '@scalar/api-reference/style.css'
 import { createApiReference } from '@scalar/api-reference'
 import { Marked } from 'marked'
 import config from '/scalar.config.json'
+import { mountDocsChat } from './docs-chat.js'
 
 function flattenRoutes(routes) {
     const pages = {}
@@ -189,5 +190,8 @@ if (matchedRoute) {
         url: import.meta.env.DEV
             ? '/api-docs/openapi.json'
             : 'https://cawv6iwjgxpk5fj2fchs6vc5vq0bycwp.lambda-url.us-east-2.on.aws/api-docs/openapi.json',
+        agent: { disabled: true },
     })
 }
+
+mountDocsChat()
