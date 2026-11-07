@@ -20,7 +20,7 @@ function loadSecretKey() {
     if (process.env.OPEN_AI_SECRET_KEY) return process.env.OPEN_AI_SECRET_KEY.trim()
     const candidates = [
         path.join(pluginDir, '.env'),
-        path.join(pluginDir, '../general_datebase/.env'),
+        path.join(pluginDir, '../granite-front/.env'),
     ]
     for (const file of candidates) {
         if (!existsSync(file)) continue
