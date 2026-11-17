@@ -38,6 +38,11 @@
           }
         }
       },
+      "/repeat-leads": {
+        "title": "Repeat Leads & Multi-Step Forms",
+        "type": "page",
+        "filepath": "repeat-leads.md"
+      },
       "/inbound-email-setup": {
         "title": "Inbound Email Setup",
         "type": "page",

@@ -60,6 +60,8 @@ Important for statistics: you must send both <code style="color:#b91c1c;font-wei
 
 > **Tip:** Map as many optional fields as your Facebook Lead Form collects. Fields you leave empty are sent as `null` and ignored by the API.
 
+> **Repeat leads:** a lead with the same `email` or `phone` as an existing customer updates that customer instead of creating a duplicate. Use this to send a quiz or a second form as a separate request. See [Repeat Leads & Multi-Step Forms](/repeat-leads).
+
 ## Example Payload
 
 Below is an example of the final JSON payload your Zap should send to the webhook. Use it as a reference when mapping your fields:
