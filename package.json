@@ -8,7 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@scalar/api-reference": "latest"
+    "@scalar/api-reference": "latest",
+    "marked": "^18.0.5"
   },
   "devDependencies": {
     "vite": "^8"
